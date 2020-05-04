@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BeerpongApplication {
+public class BeerPongApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BeerpongApplication.class, args);
+        SpringApplication.run(BeerPongApplication.class, args);
     }
 
 }
