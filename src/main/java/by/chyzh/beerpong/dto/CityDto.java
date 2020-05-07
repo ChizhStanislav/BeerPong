@@ -12,9 +12,9 @@ import lombok.ToString;
 public class CityDto {
 
     private Long id;
-    private String nameEnglish;
-    private String nameRussian;
+    private String name;
     private Long countryId;
+    private Long regionId;
 
     public CityDto() {
 
@@ -25,8 +25,8 @@ public class CityDto {
             return;
         }
         this.id = city.getId();
-        this.nameEnglish = city.getNameEnglish();
-        this.nameRussian = city.getNameRussian();
+        this.name = city.getName();
         this.countryId = city.getCountry().getId();
+        this.regionId = city.getRegion().getId();
     }
 }

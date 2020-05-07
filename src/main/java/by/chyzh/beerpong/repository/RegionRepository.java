@@ -1,6 +1,7 @@
 package by.chyzh.beerpong.repository;
 
 import by.chyzh.beerpong.entity.City;
+import by.chyzh.beerpong.entity.Region;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -10,14 +11,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CityRepository extends CrudRepository<City, Long> {
+public interface RegionRepository extends CrudRepository<Region, Long> {
 
     @Modifying
-    @Query("update City c set c.name = :name, c.country.id = :countryId, c.region.id =:regionId where c.id = :id")
+    @Query("update Region r set r.name = :name, r.country.id = :countryId where r.id = :id ")
     void update(@Param("id") Long id,
                 @Param("name") String name,
-                @Param("countryId") Long countryId,
-                @Param("regionId") Long regionId);
+                @Param("countryId") Long countryId);
 
-    List<City> findAll();
+    List<Region> findAll();
 }

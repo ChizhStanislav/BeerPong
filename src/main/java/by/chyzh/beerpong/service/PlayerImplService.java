@@ -6,6 +6,7 @@ import by.chyzh.beerpong.exception.NotFound;
 import by.chyzh.beerpong.repository.CityRepository;
 import by.chyzh.beerpong.repository.CountryRepository;
 import by.chyzh.beerpong.repository.PlayerRepository;
+import by.chyzh.beerpong.repository.RegionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ public class PlayerImplService implements PlayerService {
 
     private final PlayerRepository playerRepository;
     private final CountryRepository countryRepository;
+    private final RegionRepository regionRepository;
     private final CityRepository cityRepository;
 
     @Transactional
@@ -30,6 +32,8 @@ public class PlayerImplService implements PlayerService {
                 .email(playerDto.getEmail())
                 .country(countryRepository.findById(playerDto.getCountryId()).orElseThrow(
                         () -> new NotFound("Country with id=" + playerDto.getCountryId() + " not found")))
+                .region(regionRepository.findById(playerDto.getRegionId()).orElseThrow(
+                        () -> new NotFound("Region with id=" + playerDto.getRegionId() + " not found")))
                 .city(cityRepository.findById(playerDto.getCityId()).orElseThrow(
                         () -> new NotFound("City with id=" + playerDto.getCityId() + " not found")))
                 .build());
@@ -39,7 +43,7 @@ public class PlayerImplService implements PlayerService {
     @Override
     public void update(PlayerDto playerDto) {
         playerRepository.update(playerDto.getId(), playerDto.getNickName(), playerDto.getEmail(),
-                playerDto.getCountryId(), playerDto.getCityId());
+                playerDto.getCountryId(),playerDto.getRegionId(), playerDto.getCityId());
     }
 
     @Transactional

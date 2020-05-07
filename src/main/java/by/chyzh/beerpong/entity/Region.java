@@ -1,5 +1,6 @@
 package by.chyzh.beerpong.entity;
 
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,25 +9,24 @@ import java.util.List;
 @Builder
 @Setter
 @Getter
-@ToString(exclude = "players")
+@ToString(exclude = {"cities", "region"})
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "city", schema = "public")
-public class City extends BaseEntity<Long> {
+@Table(name = "region", schema = "public")
+public class Region extends BaseEntity<Long> {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
     private Country country;
 
-    @ManyToOne
-    @JoinColumn(name = "region_id")
-    private Region region;
+    @OneToMany(mappedBy = "region")
+    private List<City> cities;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "region")
     private List<Player> players;
 }

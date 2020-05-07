@@ -21,15 +21,14 @@ public class CountryImplService implements CountryService {
     @Override
     public Country save(CountryDto countryDto) {
         return countryRepository.save(Country.builder()
-                .nameEnglish(countryDto.getNameEnglish())
-                .nameRussian(countryDto.getNameRussian())
+                .name(countryDto.getName())
                 .build());
     }
 
     @Transactional
     @Override
     public void update(CountryDto countryDto) {
-        countryRepository.update(countryDto.getId(), countryDto.getNameEnglish(), countryDto.getNameRussian());
+        countryRepository.update(countryDto.getId(), countryDto.getName());
     }
 
     @Transactional

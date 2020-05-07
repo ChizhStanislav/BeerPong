@@ -29,6 +29,10 @@ public class Player extends BaseEntity<Long> {
     private Country country;
 
     @ManyToOne
+    @JoinColumn(name = "region_id")
+    private Region region;
+
+    @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
 

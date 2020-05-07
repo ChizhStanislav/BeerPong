@@ -16,14 +16,14 @@ import java.util.List;
 @Table(name = "country", schema = "public")
 public class Country extends BaseEntity<Long> {
 
-    @Column(name = "name_english", nullable = false, unique = true)
-    private String nameEnglish;
-
-    @Column(name = "name_russian", nullable = false, unique = true)
-    private String nameRussian;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
     @OneToMany(mappedBy = "country")
     private List<City> cities;
+
+    @OneToMany(mappedBy = "country")
+    private List<Region> regions;
 
     @OneToMany(mappedBy = "country")
     private List<Player> players;

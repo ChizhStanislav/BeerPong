@@ -13,11 +13,12 @@ import java.util.List;
 public interface PlayerRepository extends CrudRepository<Player, Long> {
 
     @Modifying
-    @Query("update Player p set p.nickName = :nickName, p.email = :email, p.country.id =:countryId, p.city.id =:cityId where p.id = :id ")
+    @Query("update Player p set p.nickName = :nickName, p.email = :email, p.country.id =:countryId, p.region.id =:regionId, p.city.id =:cityId where p.id = :id ")
     void update(@Param("id") Long id,
                 @Param("nickName") String nickName,
                 @Param("email") String email,
                 @Param("countryId") Long countryId,
+                @Param("regionId") Long regionId,
                 @Param("cityId") Long cityId);
 
     @Modifying

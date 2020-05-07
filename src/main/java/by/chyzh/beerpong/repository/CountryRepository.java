@@ -13,10 +13,9 @@ import java.util.List;
 public interface CountryRepository extends CrudRepository<Country, Long> {
 
     @Modifying
-    @Query("update Country c set c.nameEnglish = :nameEnglish, c.nameRussian = :nameRussian where c.id = :id ")
+    @Query("update Country c set c.name = :name where c.id = :id ")
     void update(@Param("id") Long id,
-                @Param("nameEnglish") String nameEnglish,
-                @Param("nameRussian") String nameRussian);
+                @Param("name") String name);
 
     List<Country> findAll();
 }
