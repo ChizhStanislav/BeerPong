@@ -1,8 +1,8 @@
 package by.chyzh.beerpong.controller;
 
-import by.chyzh.beerpong.dto.CountryDto;
-import by.chyzh.beerpong.entity.Country;
-import by.chyzh.beerpong.service.CountryService;
+import by.chyzh.beerpong.dto.location.CountryDto;
+import by.chyzh.beerpong.entity.location.Country;
+import by.chyzh.beerpong.service.location.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,8 @@
 package by.chyzh.beerpong.controller;
 
-import by.chyzh.beerpong.dto.PlayerDto;
-import by.chyzh.beerpong.entity.Player;
-import by.chyzh.beerpong.service.PlayerService;
+import by.chyzh.beerpong.dto.player.PlayerDto;
+import by.chyzh.beerpong.entity.player.Player;
+import by.chyzh.beerpong.service.player.PlayerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
