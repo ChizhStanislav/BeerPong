@@ -22,7 +22,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//@Table(name = "tournament_team_player", schema = "public")
 @DiscriminatorValue("TEAM")
 public class TournamentTeam extends TournamentPlayer {
 

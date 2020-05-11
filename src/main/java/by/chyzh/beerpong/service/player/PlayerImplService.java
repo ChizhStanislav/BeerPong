@@ -1,6 +1,7 @@
 package by.chyzh.beerpong.service.player;
 
 import by.chyzh.beerpong.dto.player.PlayerDto;
+import by.chyzh.beerpong.entity.dictionary.Role;
 import by.chyzh.beerpong.entity.player.Player;
 import by.chyzh.beerpong.exception.NotFound;
 import by.chyzh.beerpong.repository.player.PlayerRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,10 +28,18 @@ public class PlayerImplService implements PlayerService {
     @Transactional
     @Override
     public Player save(PlayerDto playerDto) {
+
+        Role role = Role.USER;
+
+        if (Objects.nonNull(playerDto.getRole())) {
+            role = Role.valueOf(playerDto.getRole());
+        }
+
         return playerRepository.save(Player.builder()
                 .nickName(playerDto.getNickName())
                 .password(playerDto.getPassword())
                 .email(playerDto.getEmail())
+                .role(role)
                 .country(countryService.findById(playerDto.getCountryId()))
                 .region(regionService.findById(playerDto.getRegionId()))
                 .city(cityService.findById(playerDto.getCityId()))
@@ -40,7 +50,7 @@ public class PlayerImplService implements PlayerService {
     @Override
     public void update(PlayerDto playerDto) {
         playerRepository.update(playerDto.getId(), playerDto.getNickName(), playerDto.getEmail(),
-                playerDto.getCountryId(),playerDto.getRegionId(), playerDto.getCityId());
+                Role.valueOf(playerDto.getRole()), playerDto.getCountryId(), playerDto.getRegionId(), playerDto.getCityId());
     }
 
     @Transactional
