@@ -13,12 +13,14 @@ public class PlayerDto {
     private Long id;
     private String nickName;
     private String password;
+    private String role;
     private Long countryId;
     private Long regionId;
     private Long cityId;
     private String email;
 
     public PlayerDto() {
+
     }
 
     public PlayerDto(Player player) {
@@ -31,6 +33,7 @@ public class PlayerDto {
         this.countryId = player.getCountry().getId();
         this.regionId = player.getRegion().getId();
         this.cityId = player.getCity().getId();
+        this.role = player.getRole().name();
         this.email = player.getEmail();
     }
 }

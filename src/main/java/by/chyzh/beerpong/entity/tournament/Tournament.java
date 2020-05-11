@@ -1,14 +1,21 @@
 package by.chyzh.beerpong.entity.tournament;
 
 import by.chyzh.beerpong.entity.BaseEntity;
-import by.chyzh.beerpong.entity.dictionary.SpeciesTournament;
 import by.chyzh.beerpong.entity.player.Player;
-import by.chyzh.beerpong.entity.player.Team;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Builder
 @Setter
@@ -41,12 +48,12 @@ public class Tournament extends BaseEntity<Long> {
     @JoinColumn(name = "type_tournament_id")
     private TypeTournament typeTournament;
 
-    @Enumerated(EnumType.STRING)
-    private SpeciesTournament speciesTournament;
+    @Column(name ="qualifier_game", nullable = false)
+    private Byte qualifierGameQuantity;
 
-    @ManyToMany
-    @JoinTable(name = "tournament_team", schema = "public",
-            joinColumns = @JoinColumn(name = "tournament_id"),
-            inverseJoinColumns = @JoinColumn(name = "team_id"))
-    private List<Team> teams;
+//    @ManyToMany
+//    @JoinTable(name = "tournament_team_player", schema = "public",
+//            joinColumns = @JoinColumn(name = "tournament_id"),
+//            inverseJoinColumns = @JoinColumn(name = "team_id"))
+//    private List<Team> teams;
 }

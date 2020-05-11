@@ -1,4 +1,4 @@
-package by.chyzh.beerpong.controller;
+package by.chyzh.beerpong.controller.location;
 
 import by.chyzh.beerpong.dto.location.CityDto;
 import by.chyzh.beerpong.entity.location.City;
