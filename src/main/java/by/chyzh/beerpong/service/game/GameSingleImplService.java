@@ -60,6 +60,7 @@ public class GameSingleImplService implements GameSingleService {
         return gameTeamRepository.findById(id).orElseThrow(() -> new NotFound("GameTeam with id=" + id + " not found"));
     }
 
+
     @Override
     public List<GameSingle> findAllByTournament(Long tournamentId) {
         return gameTeamRepository.findAllByTournament(tournamentId);
