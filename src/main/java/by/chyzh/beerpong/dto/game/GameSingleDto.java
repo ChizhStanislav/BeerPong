@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 public class GameSingleDto {
 
     private Long id;
-    private String type;
     private String typeGame;
     private Long tournamentId;
     private Byte stage;
@@ -32,7 +31,6 @@ public class GameSingleDto {
             return;
         }
         this.id = gameSingle.getId();
-        this.type = gameSingle.getType().name();
         this.typeGame = gameSingle.getTypeGame().name();
         this.tournamentId = gameSingle.getTournament().getId();
         this.stage = gameSingle.getStage();

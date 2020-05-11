@@ -10,19 +10,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Setter
 @Getter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tournament_team_player", schema = "public")
+//@Table(name = "tournament_team_player", schema = "public")
+@DiscriminatorValue("TEAM")
 public class TournamentTeam extends TournamentPlayer {
 
     @ManyToOne

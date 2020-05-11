@@ -1,6 +1,5 @@
 package by.chyzh.beerpong.repository.game;
 
-import by.chyzh.beerpong.entity.dictionary.Type;
 import by.chyzh.beerpong.entity.dictionary.TypeGame;
 import by.chyzh.beerpong.entity.game.GameTeam;
 import org.springframework.data.jpa.repository.Modifying;
@@ -16,11 +15,10 @@ import java.util.List;
 public interface GameTeamRepository extends CrudRepository<GameTeam, Long> {
 
     @Modifying
-    @Query("update GameTeam gt set gt.type = :type, gt.typeGame = :typeGame, gt.tournament.id =:tournamentId," +
+    @Query("update GameTeam gt set gt.typeGame = :typeGame, gt.tournament.id =:tournamentId," +
             "gt.stage =:stage, gt.glass =:glass, gt.point =:point, gt.startDate =:startDate, gt.finishDate =:finishDate, " +
             "gt.team.id =:teamId where gt.id = :id ")
     void update(@Param("id") Long id,
-                @Param("type") Type type,
                 @Param("typeGame") TypeGame typeGame,
                 @Param("tournamentId") Long tournamentId,
                 @Param("stage") Byte stage,

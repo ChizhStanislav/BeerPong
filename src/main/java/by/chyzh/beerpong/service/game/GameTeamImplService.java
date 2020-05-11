@@ -1,7 +1,6 @@
 package by.chyzh.beerpong.service.game;
 
 import by.chyzh.beerpong.dto.game.GameTeamDto;
-import by.chyzh.beerpong.entity.dictionary.Type;
 import by.chyzh.beerpong.entity.dictionary.TypeGame;
 import by.chyzh.beerpong.entity.game.GameTeam;
 import by.chyzh.beerpong.exception.NotFound;
@@ -27,7 +26,6 @@ public class GameTeamImplService implements GameTeamService {
     @Override
     public GameTeam save(GameTeamDto gameTeamDto) {
         return gameTeamRepository.save(GameTeam.builder()
-                .type(Type.valueOf(gameTeamDto.getType()))
                 .typeGame(TypeGame.valueOf(gameTeamDto.getTypeGame()))
                 .tournament(tournamentService.findById(gameTeamDto.getTournamentId()))
                 .stage(gameTeamDto.getStage())
@@ -39,7 +37,7 @@ public class GameTeamImplService implements GameTeamService {
     @Transactional
     @Override
     public void update(GameTeamDto gameTeamDto) {
-        gameTeamRepository.update(gameTeamDto.getId(), Type.valueOf(gameTeamDto.getType()), TypeGame.valueOf(gameTeamDto.getTypeGame()),
+        gameTeamRepository.update(gameTeamDto.getId(), TypeGame.valueOf(gameTeamDto.getTypeGame()),
                 gameTeamDto.getTournamentId(), gameTeamDto.getStage(), gameTeamDto.getGlass(), gameTeamDto.getPoint(),
                 gameTeamDto.getStartDate(), gameTeamDto.getFinishDate(), gameTeamDto.getTeamId());
     }

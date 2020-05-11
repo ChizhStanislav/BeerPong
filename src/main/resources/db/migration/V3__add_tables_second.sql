@@ -33,6 +33,7 @@ CREATE TABLE tournament
 CREATE TABLE tournament_team_player
 (
     id                BIGSERIAL PRIMARY KEY,
+    type          VARCHAR(10)                       NOT NULL,
     tournament_id     BIGINT references tournament (id) NOT NULL,
     team_id           BIGINT references team (id),
     player_id         BIGINT references player (id)     NOT NULL,

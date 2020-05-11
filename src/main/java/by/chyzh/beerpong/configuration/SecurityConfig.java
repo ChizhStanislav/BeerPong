@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 @Configuration
@@ -27,23 +28,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
 
-//        http
-//                .authorizeRequests()
-////                .antMatchers().hasAuthority(ADMINISTRATOR.name())
-////                .antMatchers().hasAnyAuthority(ADMINISTRATOR.name(), MODERATOR.name())
-//                .anyRequest().permitAll()
-//                .and()
-//                .addFilterBefore(filter, CsrfFilter.class)
-//                .csrf().disable()
-//                .formLogin()
-////                    .loginPage(GENERAL)
-//                .defaultSuccessUrl("/index")
-////                    .failureUrl(GENERAL)
-//                .and()
-//                .httpBasic()
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/index");
+        http
+                .authorizeRequests()
+//                .antMatchers().hasAuthority(ADMINISTRATOR.name())
+//                .antMatchers().hasAnyAuthority(ADMINISTRATOR.name(), MODERATOR.name())
+                .anyRequest().permitAll()
+                .and()
+                .addFilterBefore(filter, CsrfFilter.class)
+                .csrf().disable()
+                .formLogin()
+//                    .loginPage(GENERAL)
+                .defaultSuccessUrl("/index")
+//                    .failureUrl(GENERAL)
+                .and()
+                .httpBasic()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/index");
     }
 
     @Bean

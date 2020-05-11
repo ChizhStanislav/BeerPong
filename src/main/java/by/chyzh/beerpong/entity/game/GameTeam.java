@@ -1,6 +1,5 @@
 package by.chyzh.beerpong.entity.game;
 
-import by.chyzh.beerpong.entity.dictionary.Type;
 import by.chyzh.beerpong.entity.dictionary.TypeGame;
 import by.chyzh.beerpong.entity.player.Team;
 import by.chyzh.beerpong.entity.tournament.Tournament;
@@ -12,10 +11,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 
@@ -26,17 +25,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "game", schema = "public")
+//@Table(name = "game", schema = "public")
+@DiscriminatorValue("TEAM")
 public class GameTeam extends Game {
-
-    @Builder
-    public GameTeam(Type type, TypeGame typeGame, Tournament tournament, Byte stage, Byte glass, Byte point,
-                    LocalDateTime startDate, LocalDateTime finishDate, Team team) {
-        super(type, typeGame, tournament, stage, glass, point, startDate, finishDate);
-        this.team = team;
-    }
 
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @Builder
+    public GameTeam(TypeGame typeGame, Tournament tournament, Byte stage, Byte glass, Byte point,
+                    LocalDateTime startDate, LocalDateTime finishDate, Team team) {
+        super(typeGame, tournament, stage, glass, point, startDate, finishDate);
+        this.team = team;
+    }
+
+
 }

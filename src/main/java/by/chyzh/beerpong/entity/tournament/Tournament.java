@@ -2,20 +2,12 @@ package by.chyzh.beerpong.entity.tournament;
 
 import by.chyzh.beerpong.entity.BaseEntity;
 import by.chyzh.beerpong.entity.player.Player;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import by.chyzh.beerpong.entity.player.Team;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Setter
@@ -51,9 +43,9 @@ public class Tournament extends BaseEntity<Long> {
     @Column(name ="qualifier_game", nullable = false)
     private Byte qualifierGameQuantity;
 
-//    @ManyToMany
-//    @JoinTable(name = "tournament_team_player", schema = "public",
-//            joinColumns = @JoinColumn(name = "tournament_id"),
-//            inverseJoinColumns = @JoinColumn(name = "team_id"))
-//    private List<Team> teams;
+    @ManyToMany
+    @JoinTable(name = "tournament_team_player", schema = "public",
+            joinColumns = @JoinColumn(name = "tournament_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id"))
+    private List<Team> teams;
 }

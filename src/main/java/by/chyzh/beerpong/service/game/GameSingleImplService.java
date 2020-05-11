@@ -1,7 +1,6 @@
 package by.chyzh.beerpong.service.game;
 
 import by.chyzh.beerpong.dto.game.GameSingleDto;
-import by.chyzh.beerpong.entity.dictionary.Type;
 import by.chyzh.beerpong.entity.dictionary.TypeGame;
 import by.chyzh.beerpong.entity.game.GameSingle;
 import by.chyzh.beerpong.exception.NotFound;
@@ -12,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -27,11 +27,10 @@ public class GameSingleImplService implements GameSingleService {
     @Override
     public GameSingle save(GameSingleDto gameSingleDto) {
         return gameTeamRepository.save(GameSingle.builder()
-                .type(Type.valueOf(gameSingleDto.getType()))
                 .typeGame(TypeGame.valueOf(gameSingleDto.getTypeGame()))
                 .tournament(tournamentService.findById(gameSingleDto.getTournamentId()))
                 .stage(gameSingleDto.getStage())
-                .startDate(gameSingleDto.getStartDate())
+                .startDate(LocalDateTime.now())
                 .player(playerService.findById(gameSingleDto.getPlayerId()))
                 .build());
     }
@@ -39,7 +38,7 @@ public class GameSingleImplService implements GameSingleService {
     @Transactional
     @Override
     public void update(GameSingleDto gameSingleDto) {
-        gameTeamRepository.update(gameSingleDto.getId(), Type.valueOf(gameSingleDto.getType()), TypeGame.valueOf(gameSingleDto.getTypeGame()),
+        gameTeamRepository.update(gameSingleDto.getId(), TypeGame.valueOf(gameSingleDto.getTypeGame()),
                 gameSingleDto.getTournamentId(), gameSingleDto.getStage(), gameSingleDto.getGlass(), gameSingleDto.getPoint(),
                 gameSingleDto.getStartDate(), gameSingleDto.getFinishDate(), gameSingleDto.getPlayerId());
     }

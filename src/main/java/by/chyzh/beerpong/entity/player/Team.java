@@ -4,6 +4,7 @@ import by.chyzh.beerpong.entity.BaseEntity;
 import by.chyzh.beerpong.entity.location.City;
 import by.chyzh.beerpong.entity.location.Country;
 import by.chyzh.beerpong.entity.location.Region;
+import by.chyzh.beerpong.entity.tournament.Tournament;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -15,9 +16,12 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Setter
@@ -52,10 +56,10 @@ public class Team extends BaseEntity<Long> {
     @Column(name ="registration_date", nullable = false)
     private LocalDateTime registrationDate;
 
-//    @ManyToMany
-//    @JoinTable(name = "tournament_team_player", schema = "public",
-//            joinColumns = @JoinColumn(name = "team_id"),
-//            inverseJoinColumns = @JoinColumn(name = "tournament_id"))
-//    private List<Tournament> tournaments;
+    @ManyToMany
+    @JoinTable(name = "tournament_team_player", schema = "public",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "tournament_id"))
+    private List<Tournament> tournaments;
 
 }

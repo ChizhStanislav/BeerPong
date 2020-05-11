@@ -14,7 +14,6 @@ public class GameTeamDto {
 
 
     private Long id;
-    private String type;
     private String typeGame;
     private Long tournamentId;
     private Byte stage;
@@ -33,7 +32,6 @@ public class GameTeamDto {
             return;
         }
         this.id = gameTeam.getId();
-        this.type = gameTeam.getType().name();
         this.typeGame = gameTeam.getTypeGame().name();
         this.tournamentId = gameTeam.getTournament().getId();
         this.stage = gameTeam.getStage();
