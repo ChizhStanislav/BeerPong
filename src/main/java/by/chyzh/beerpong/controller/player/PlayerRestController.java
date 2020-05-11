@@ -1,4 +1,4 @@
-package by.chyzh.beerpong.controller;
+package by.chyzh.beerpong.controller.player;
 
 import by.chyzh.beerpong.dto.player.PlayerDto;
 import by.chyzh.beerpong.entity.player.Player;

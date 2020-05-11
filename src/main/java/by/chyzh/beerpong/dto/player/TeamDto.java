@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -21,7 +20,7 @@ public class TeamDto {
     private Long countryId;
     private Long regionId;
     private Long cityId;
-    private LocalDate registrationDate;
+    private LocalDateTime registrationDate;
     private List<TournamentDto> tournamentDtoList;
 
     public TeamDto() {
@@ -39,8 +38,8 @@ public class TeamDto {
         this.regionId = team.getRegion().getId();
         this.cityId = team.getCity().getId();
         this.registrationDate = team.getRegistrationDate();
-        this.tournamentDtoList = team.getTournaments().stream()
-                .map(TournamentDto::new)
-                .collect(Collectors.toList());
+//        this.tournamentDtoList = team.getTournaments().stream()
+//                .map(TournamentDto::new)
+//                .collect(Collectors.toList());
     }
 }

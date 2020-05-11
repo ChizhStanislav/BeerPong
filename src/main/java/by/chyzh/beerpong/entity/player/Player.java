@@ -5,9 +5,22 @@ import by.chyzh.beerpong.entity.dictionary.Role;
 import by.chyzh.beerpong.entity.location.City;
 import by.chyzh.beerpong.entity.location.Country;
 import by.chyzh.beerpong.entity.location.Region;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 
 @Builder
 @Setter
@@ -43,4 +56,10 @@ public class Player extends BaseEntity<Long> {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+//    @ManyToMany
+//    @JoinTable(name = "tournament_team_player", schema = "public",
+//            joinColumns = @JoinColumn(name = "player_id"),
+//            inverseJoinColumns = @JoinColumn(name = "tournament_id"))
+//    private List<Tournament> tournaments;
 }

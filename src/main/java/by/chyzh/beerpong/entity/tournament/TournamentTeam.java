@@ -2,48 +2,43 @@ package by.chyzh.beerpong.entity.tournament;
 
 
 import by.chyzh.beerpong.entity.player.Player;
-import lombok.*;
+import by.chyzh.beerpong.entity.player.Team;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
-@Builder
 @Setter
 @Getter
 @EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tournament_team", schema = "public")
-public class TournamentTeam {
-
-    @EmbeddedId
-    private TournamentTeamId id;
+@Table(name = "tournament_team_player", schema = "public")
+public class TournamentTeam extends TournamentPlayer {
 
     @ManyToOne
-    @JoinColumn(name = "first_player_id")
-    private Player firstPlayer;
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     @ManyToOne
     @JoinColumn(name = "second_player_id")
     private Player secondPlayer;
 
-    @Column(name = "registration_date")
-    private LocalDateTime registrationDate;
-
-    @Builder
-    @Setter
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Embeddable
-    public static class TournamentTeamId implements Serializable {
-
-        @Column(name = "tournament_id")
-        private Long tournamentId;
-
-        @Column(name = "team_id")
-        private Long teamId;
+    @Builder(builderMethodName = "tournamentTeamBuilder")
+    public TournamentTeam(Tournament tournament, Player player, Byte pointForTournament,
+                          LocalDateTime registrationDate, Team team, Player secondPlayer) {
+        super(tournament, player, pointForTournament, registrationDate);
+        this.team = team;
+        this.secondPlayer = secondPlayer;
     }
+
 }

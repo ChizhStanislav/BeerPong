@@ -6,20 +6,7 @@ CREATE TABLE team
     country_id        BIGINT references country (id) NOT NULL,
     region_id         BIGINT references region (id)  NOT NULL,
     city_id           BIGINT references city (id)    NOT NULL,
-    registration_date DATE                           NOT NULL
-);
-
-CREATE TABLE game
-(
-    id               BIGSERIAL PRIMARY KEY,
-    type             VARCHAR(15) NOT NULL,
-    first_team_id    BIGINT references team (id),
-    second_team_id   BIGINT references team (id),
-    first_player_id  BIGINT references player (id),
-    second_player_id BIGINT references player (id),
-    start_date       TIMESTAMP   NOT NULL,
-    finish_date      TIMESTAMP   NOT NULL
-
+    registration_date TIMESTAMP                           NOT NULL
 );
 
 CREATE TABLE type_tournament
@@ -31,51 +18,45 @@ CREATE TABLE type_tournament
     UNIQUE (name, owner_id)
 );
 
-CREATE TABLE point
-(
-    id                 BIGSERIAL PRIMARY KEY,
-    type               VARCHAR(50) NOT NULL,
-    quantity_point     SMALLINT    NOT NULL,
-    add_date           TIMESTAMP   NOT NULL,
-    type_tournament_id BIGINT references type_tournament (id),
-    team_id            BIGINT references team (id),
-    player_id          BIGINT references player (id),
-    game_id            BIGINT references game (id)
-);
-
-CREATE TABLE glass
-(
-    id                 BIGSERIAL PRIMARY KEY,
-    type               VARCHAR(50) NOT NULL,
-    quantity_glass     SMALLINT  NOT NULL,
-    add_date           TIMESTAMP NOT NULL,
-    type_tournament_id BIGINT references type_tournament (id),
-    team_id            BIGINT references team (id),
-    player_id          BIGINT references player (id),
-    game_id            BIGINT references game (id)
-);
-
-
-
 CREATE TABLE tournament
 (
     id                  BIGSERIAL PRIMARY KEY,
     name                VARCHAR(255)                           NOT NULL,
     owner_tournament_id BIGINT references player (id)          NOT NULL,
     type_tournament_id  BIGINT references type_tournament (id) NOT NULL,
-    speciesTournament   VARCHAR(255)                           NOT NULL,
+    qualifier_game      SMALLINT                               NOT NULL,
     registration_date   TIMESTAMP                              NOT NULL,
-    start_date          TIMESTAMP                              NOT NULL,
-    finish_date         TIMESTAMP                              NOT NULL
+    start_date          TIMESTAMP,
+    finish_date         TIMESTAMP
 );
 
-CREATE TABLE tournament_team
+CREATE TABLE tournament_team_player
 (
-    tournament_id     BIGINT,
-    team_id           BIGINT,
-    first_player_id   BIGINT references player (id) NOT NULL,
-    second_player_id  BIGINT references player (id) NOT NULL,
-    registration_date TIMESTAMP                     NOT NULL,
-    PRIMARY KEY (tournament_id, team_id)
+    id                BIGSERIAL PRIMARY KEY,
+    tournament_id     BIGINT references tournament (id) NOT NULL,
+    team_id           BIGINT references team (id),
+    player_id         BIGINT references player (id)     NOT NULL,
+    second_player_id  BIGINT references player (id),
+    point_tournament  SMALLINT,
+    registration_date TIMESTAMP                         NOT NULL
 );
+
+CREATE TABLE game
+(
+    id            BIGSERIAL PRIMARY KEY,
+    type_game     VARCHAR(20)                       NOT NULL,
+    type          VARCHAR(10)                       NOT NULL,
+    stage         SMALLINT                          NOT NULL,
+    tournament_id BIGINT references tournament (id) NOT NULL,
+    team_id       BIGINT references team (id),
+    player_id     BIGINT references player (id),
+    point         SMALLINT,
+    glass         SMALLINT,
+    start_date    TIMESTAMP                         NOT NULL,
+    finish_date   TIMESTAMP
+);
+
+
+
+
 
